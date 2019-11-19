@@ -1,0 +1,6 @@
+# ignore folders
+env/
+# ignore temporary files
+*.pyc
+*.owl
+
