@@ -19,6 +19,9 @@ Source files for the paper "A Knowledge Based System for Managing Heterogeneous 
 * preprocess_query_results.py - remove prefixes of query results
 * simplegui.py - the name says it all
 
+# Requirements
+Python 3.7+ is recommended.
+
 # License
 For now, the following license holds:
 
