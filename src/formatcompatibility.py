@@ -20,14 +20,21 @@ QUERY = """PREFIX : <http://david.org/informationmodel.owl#>
         }"""
 
 def returnresults(li):
-    for i in li:
-        if not i[1]:
-            print(i[0], "- no tool available for format ", i[2])
-        else:
-            print(i[0], "- no license available for tool", i[1])
+    if not li:
+        text = "no incompatibilities detected"
+    else:
+        text = "incompatibilities are:"
+        for i in li:
+            if not i[1]:
+                newline = "\n"+str(i[0])+" - no tool available for format "+str(i[2])
+                text += newline
+            else:
+                newline = "\n"+str(i[0])+" - no license available for tool "+str(i[1])
+                text += newline
+    return text
 
 def main():
-    returnresults(xq.executequery(ONTOFILE, QUERY))
+    return returnresults(xq.executequery(ONTOFILE, QUERY))
 
 if __name__ == "__main__":
-    main()
+    print(main())

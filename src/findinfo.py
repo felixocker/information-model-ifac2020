@@ -21,12 +21,17 @@ def confquery(infokind, system):
 
 def returnresults(li):
     """print query results in an easily interpretable way"""
-    print("info is available in:")
-    for i in li:
-        print(i[0],"stored here:",i[1])
+    if not li:
+        text = "no info available"
+    else:
+        text = "info is available in:"
+        for i in li:
+            newline = "\n"+str(i[0])+" stored here: "+str(i[1])
+            text += newline
+    return text
 
 def main(infokind, system):
-    returnresults(xq.executequery(ONTOFILE, confquery(infokind, system)))
+    return returnresults(xq.executequery(ONTOFILE, confquery(infokind, system)))
 
 if __name__ == "__main__":
-    main(infokind=":structural_information", system=":PPU")
+    print(main(infokind=":structural_information", system=":PPU"))

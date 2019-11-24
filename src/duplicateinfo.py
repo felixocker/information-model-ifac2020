@@ -19,16 +19,23 @@ QUERY = """PREFIX : <http://david.org/informationmodel.owl#>
 
 def returnresults(li):
     """print query results in an easily interpretable way"""
-    print("duplicate info:")
-    print(li[0][0],"contained in",li[0][1],"stored in",li[0][2])
-    for a, b in zip(li[1:], li):
-        if a[0] == b[0]:
-            print("\talso contained in",a[1],"stored in",a[2])
-        else:
-            print(a[0],"contained in",a[1],"stored in",a[2])
+    text = "duplicate info:"
+    if not li:
+        text = "no duplicate info"
+    else:
+        newline = "\n"+str(li[0][0])+" contained in "+str(li[0][1])+" stored in "+str(li[0][2])
+        text += newline
+        for a, b in zip(li[1:], li):
+            if a[0] == b[0]:
+                newline = "\n\talso contained in "+str(a[1])+" stored in "+str(a[2])
+                text += newline
+            else:
+                newline = "\n"+str(a[0])+" contained in "+str(a[1])+" stored in "+str(a[2])
+                text += newline
+    return text
 
 def main():
-    returnresults(xq.executequery(ONTOFILE, QUERY))
+    return returnresults(xq.executequery(ONTOFILE, QUERY))
 
 if __name__ == "__main__":
-    main()
+    print(main())

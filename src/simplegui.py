@@ -25,14 +25,12 @@ def call_external(ext, content, lbl, *args):
              'duplicate': [duplicateinfo.main, "Check for information duplicates executed!"],
              'find': [findinfo.main, "Search for related information completed!"],
              'format': [formatcompatibility.main, "Format compatibility check executed!"]}
-    with StringIO() as buf, redirect_stdout(buf):
-        try:
-            func = funcs[ext][0]
-        except KeyError:
-            print('unknown function type')
-            sys.exit(1)
-        func(*args)
-        content.config(text=buf.getvalue())
+    try:
+        func = funcs[ext][0]
+    except KeyError:
+        print('unknown function type')
+        sys.exit(1)
+    content.config(text=func(*args))
     lbl.config(text=funcs[ext][1])
 
 # general setup

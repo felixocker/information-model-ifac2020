@@ -9,7 +9,14 @@ ONTOFILE = "file://./xppu-information-model.owl"
 def main():
     onto = get_ontology(ONTOFILE).load()
     sync_reasoner()
-    print("inconsistent classes are:",list(default_world.inconsistent_classes()))
+    text = "inconsistent classes are:"
+    if not list(default_world.inconsistent_classes()):
+        text = "no inconsistent classes"
+    else:
+        for i in range(len(list(default_world.inconsistent_classes()))):
+            text += "\n\t"
+            text += str(list(default_world.inconsistent_classes())[i])
+    return text
 
 if __name__ == "__main__":
-    main()
+    print(main())
