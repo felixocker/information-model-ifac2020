@@ -20,25 +20,20 @@ class exit_button(tk.Button):
         tk.Button.__init__(self, master, text="Exit",  command=window.quit)
 
 def call_external(ext, content, lbl, *args):
-    funcs = {'change': changepropagation.main,
-             'consistency': consistency.main,
-             'duplicate': duplicateinfo.main,
-             'find': findinfo.main,
-             'format': formatcompatibility.main}
-    labels = {'change': "Change propagation check completed!",
-              'consistency': "Consistency check executed!",
-              'duplicate': "Check for information duplicates executed!",
-              'find': "Search for related information completed!",
-              'format': "Format compatibility check executed!"}
+    funcs = {'change': [changepropagation.main, "Change propagation check completed!"],
+             'consistency': [consistency.main, "Consistency check executed!"],
+             'duplicate': [duplicateinfo.main, "Check for information duplicates executed!"],
+             'find': [findinfo.main, "Search for related information completed!"],
+             'format': [formatcompatibility.main, "Format compatibility check executed!"]}
     with StringIO() as buf, redirect_stdout(buf):
         try:
-            func = funcs[ext]
+            func = funcs[ext][0]
         except KeyError:
             print('unknown function type')
             sys.exit(1)
         func(*args)
         content.config(text=buf.getvalue())
-    lbl.config(text=labels[ext])
+    lbl.config(text=funcs[ext][1])
 
 # general setup
 window = tk.Tk()
