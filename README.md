@@ -23,8 +23,7 @@ Source files for the paper "A Knowledge Based System for Managing Heterogeneous 
 Python 3.7+ is recommended.
 
 # License
-For now, the following license holds:
+GPL v3.0
 
-Copyright © 2019 Technical University of Munich - Institute of Automation and Information Systems. <http://www.ais.mw.tum.de/en/institute/>
-
-All rights reserved. Contact: [felix.ocker@tum.de](mailto:felix.ocker@tum.de)
+# Contact
+[felix.ocker@tum.de](mailto:felix.ocker@tum.de)
