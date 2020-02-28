@@ -250,6 +250,7 @@ def im_xppu(input, output):
 ## PPU relations
     PPU.part = [PPU_conveyor, PPU_crane, PPU_stack, PPU_stamp]
     PPU_behavior.part.append(PPU_crane_behavior)
+    PPU_behavior.describes.append(PPU)
     PPU_crane.part = [PPU_crane_monostable_cylinder, PPU_crane_turning_table, PPU_crane_vacuum_gripper]
     PPU_crane_behavior.describes.append(PPU_crane)
     PPU_crane_geometry.describes.append(PPU_crane)

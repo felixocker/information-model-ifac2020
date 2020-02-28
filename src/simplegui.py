@@ -19,33 +19,19 @@ class exit_button(tk.Button):
     def __init__(self, master):
         tk.Button.__init__(self, master, text="Exit",  command=window.quit)
 
-def call_external(ext, content, lbl):
-    funcs = {'consistency': consistency.main,
-             'duplicate': duplicateinfo.main,
-             'format': formatcompatibility.main}
-    labels = {'consistency': "Consistency check executed!",
-              'duplicate': "Check for information duplicates executed!",
-              'format': "Format compatibility check executed!"}
-    with StringIO() as buf, redirect_stdout(buf):
-        try:
-            funcs[ext]()
-        except KeyError:
-            print('causes an error - unknown function type')
-            sys.exit(1)
-        content.config(text=buf.getvalue())
-    lbl.config(text=labels[ext])
-
-def call_change(content, lbl, infoconc):
-    with StringIO() as buf, redirect_stdout(buf):
-        changepropagation.main(infoconc)
-        content.config(text=buf.getvalue())
-    lbl.config(text="Change propagation check completed!")
-
-def call_find(content, lbl, infokind, system):
-    with StringIO() as buf, redirect_stdout(buf):
-        findinfo.main(infokind, system)
-        content.config(text=buf.getvalue())
-    lbl.config(text="Search for related information completed!")
+def call_external(ext, content, lbl, *args):
+    funcs = {'change': [changepropagation.main, "Change propagation check completed!"],
+             'consistency': [consistency.main, "Consistency check executed!"],
+             'duplicate': [duplicateinfo.main, "Check for information duplicates executed!"],
+             'find': [findinfo.main, "Search for related information completed!"],
+             'format': [formatcompatibility.main, "Format compatibility check executed!"]}
+    try:
+        func = funcs[ext][0]
+    except KeyError:
+        print('unknown function type')
+        sys.exit(1)
+    content.config(text=func(*args))
+    lbl.config(text=funcs[ext][1])
 
 # general setup
 window = tk.Tk()
@@ -134,8 +120,8 @@ system_dropdown = tk.OptionMenu(tab_findinfo, system, *system_options)
 find_label = tk.Label(tab_findinfo, text="Click button to the find related information.")
 find_output_label = tk.Label(tab_findinfo, text="-", anchor="w", justify="left")
 exit_button_tab_find = exit_button(tab_findinfo)
-find_button = tk.Button(tab_findinfo, text="Find info", command=lambda: call_find(find_output_label,find_label, 
-                        infokind=infokind.get(), system=system.get()))
+find_button = tk.Button(tab_findinfo, text="Find info", command=lambda: call_external("find",find_output_label,find_label, 
+                        infokind.get(), system.get()))
 
 infokind_dropdown.grid(row=0, column=0, sticky="w")
 system_dropdown.grid(row=1, column=0, sticky="w")
@@ -153,8 +139,8 @@ infoconc_dropdown = tk.OptionMenu(tab_changepropagation, infoconc, *infoconc_opt
 change_label = tk.Label(tab_changepropagation, text="Click button to the left to check change propagation.")
 change_output_label = tk.Label(tab_changepropagation, text="-", anchor="w", justify="left")
 exit_button_tab_change = exit_button(tab_changepropagation)
-change_button = tk.Button(tab_changepropagation, text="Check change propagation", command=lambda: call_change(change_output_label,change_label,
-                        infoconc=infoconc.get()))
+change_button = tk.Button(tab_changepropagation, text="Check change propagation", command=lambda: call_external("change",
+                          change_output_label,change_label,infoconc.get()))
 
 infoconc_dropdown.grid(row=0, column=0, sticky="w")
 change_button.grid(row=1, column=0, sticky="w")

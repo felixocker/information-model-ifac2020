@@ -21,11 +21,17 @@ def confquery(infoconc_changed):
     return query
 
 def returnresults(li):
-    for i in li:
-        print("notify",i[1],"that",i[0],"has been changed")
+    text = "suggested notifications:"
+    if not li:
+        text = "no notifications required"
+    else:
+        for i in li:
+            newline = "\nnotify "+str(i[1])+" that "+str(i[0])+" has been changed"
+            text += newline
+    return text
 
 def main(infoconc):
-    returnresults(xq.executequery(ONTOFILE, confquery(infoconc)))
+    return returnresults(xq.executequery(ONTOFILE, confquery(infoconc)))
 
 if __name__ == "__main__":
-    main(INFOCONC_CHANGED)
+    print(main(INFOCONC_CHANGED))

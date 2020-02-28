@@ -16,8 +16,5 @@ def confquery(parent="owl:Thing"):
 def find(parent="owl:Thing"):
     return(xq.executequery(ONTOFILE, confquery(parent)))
 
-def main():
-    print(xq.executequery(ONTOFILE, confquery()))
-
 if __name__ == "__main__":
-    main()
+    print(find())

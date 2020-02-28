@@ -14,8 +14,5 @@ QUERY = """PREFIX owl: <http://www.w3.org/2002/07/owl#>
 def find():
     return(xq.executequery(ONTOFILE, QUERY))
 
-def main():
-    print(xq.executequery(ONTOFILE, QUERY))
-
 if __name__ == "__main__":
-    main()
+    print(find())
