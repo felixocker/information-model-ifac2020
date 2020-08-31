@@ -1,5 +1,5 @@
 # information-model-ifac2020
-Source files for the paper "A Knowledge Based System for Managing Heterogeneous Sources of Engineering Information" submitted to the IFAC World Congress 2020. The paper is authored by Felix Ocker, Matthias Seitz, Christiaan J. J. Paredis, and Birgit Vogel-Heuser.
+Source files for the paper "A Knowledge Based System for Managing Heterogeneous Sources of Engineering Information" presented at the IFAC World Congress 2020
 
 # Contents
 ## knowledge graph creation (OWL)
@@ -22,8 +22,21 @@ Source files for the paper "A Knowledge Based System for Managing Heterogeneous 
 # Requirements
 Python 3.7+ is recommended.
 
+# Citation
+Please use the following bibtex entry:
+```
+@inproceedings{ocker2020ifac,
+author = {Ocker, Felix and Seitz, Matthias and Paredis, J. J. Christiaan and Vogel-Heuser, Birgit},
+booktitle = {IFAC World Congress},
+publisher = {Elsevier},
+title = {{A Knowledge Based System for Managing Heterogeneous Sources of Engineering Information}},
+year = {2020}
+}
+```
+
 # License
 GPL v3.0
 
 # Contact
-[felix.ocker@tum.de](mailto:felix.ocker@tum.de)
+Felix Ocker - [felix.ocker@tum.de](mailto:felix.ocker@tum.de)\
+Technical University of Munich - Institute of Automation and Information Systems <https://www.mw.tum.de/en/ais/homepage/>
